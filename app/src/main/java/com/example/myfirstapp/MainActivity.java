@@ -24,10 +24,13 @@ public class MainActivity extends AppCompatActivity {
         //First Name
         EditText editFirst = (EditText) findViewById(R.id.editFirst);
         String firstName = editFirst.getText().toString().trim();
-//        if (firstName.equals("")) {
-//            editFirst.requestFocus();
-//        } else {
-//        }
+        if (firstName.length()==0) {
+            editFirst.requestFocus();
+            editFirst.setError("Please Enter a Name");
+        } else if(!firstName.matches("[a-zA-Z]+")){
+            editFirst.requestFocus();
+            editFirst.setError("Enter Valid Characters Only");
+        }
         intent.putExtra("editFirst", firstName);
 
         //Last Name
@@ -49,7 +52,9 @@ public class MainActivity extends AppCompatActivity {
         intent.putExtra("adminCheck", adminStatus);
         intent.putExtra("adminToggle", adminToggle);
 
-        startActivity(intent);
+        if (firstName.length()!=0) {
+            startActivity(intent);
+        }
     }
 
 }

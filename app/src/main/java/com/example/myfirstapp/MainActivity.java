@@ -7,6 +7,7 @@ import android.os.Parcelable;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.Switch;
+import android.widget.Toast;
 
 
 public class MainActivity extends AppCompatActivity {
@@ -39,9 +40,11 @@ public class MainActivity extends AppCompatActivity {
             adminStatus = adminSwitch.getTextOff().toString();
             isAdmin = getString(R.string.admin_toggle_off);
         }
+        Toast.makeText(getApplicationContext(),"Admin Control: " + adminStatus, Toast.LENGTH_LONG).show();
+
 
         //Encapsulate Data
-        User saveData = new User();
+        User saveData = new User(firstName, lastName, isAdmin);
         saveData.setFirstName(firstName);
         saveData.setLastName(lastName);
         saveData.setIsAdmin(isAdmin);
@@ -61,16 +64,16 @@ public class MainActivity extends AppCompatActivity {
             editLast.setError("Enter Valid Characters Only");
         } else {
             //Pass All Values Through The Intent
-            Bundle userDataBundle = new Bundle();
+            intent.putExtra("User", saveData);
 
-            userDataBundle.putString("editFirst", saveData.getFirstName());
-            userDataBundle.putString("editLast", saveData.getLastName());
-            userDataBundle.putString("adminCheck", adminStatus);
-            userDataBundle.putString("adminToggle", saveData.getIsAdmin());
 
-            intent.putExtras(userDataBundle);
+//            Bundle userDataBundle = new Bundle();
+//            userDataBundle.putString("editFirst", saveData.getFirstName());
+//            userDataBundle.putString("editLast", saveData.getLastName());
+//            userDataBundle.putString("adminCheck", adminStatus);
+//            userDataBundle.putString("adminToggle", saveData.getIsAdmin());
+//            intent.putExtras(userDataBundle);
 
-//            intent.putExtra("user_data", (Parcelable) saveData);
 
             startActivity(intent);
         }

@@ -19,24 +19,22 @@ public class DisplayMessageActivity extends AppCompatActivity {
         setContentView(R.layout.activity_display_message);
 
         // Get the Intent that started this activity and extract the string
-        Intent intent = getIntent();
-        // Get the Bundle
-        Bundle userDataBundle = intent.getExtras();
-        // Get the information from the Bundle
-        String firstName = userDataBundle.getString("editFirst");
+        //Intent intent = getIntent();
+
+        User User = (User) getIntent().getSerializableExtra("User");
+
+        // Get First Name
+        String firstName = User.getFirstName();
         TextView textFirst = findViewById(R.id.textFirst);
         textFirst.setText(firstName);
-
-        String lastName = userDataBundle.getString("editLast");
+        // Get Last Name
+        String lastName = User.getLastName();
         TextView textLast = findViewById(R.id.textLast);
         textLast.setText(lastName);
-
-        String adminCheck = userDataBundle.getString("adminCheck");
-        String adminToggle = userDataBundle.getString("adminToggle");
+        // Get Admin Toggle
+        String isAdmin = User.getIsAdmin();
         adminSwitch = (Switch) findViewById(R.id.adminSwitch);
         TextView adminText = findViewById(R.id.adminText);
-        adminText.setText(adminToggle);
-        Toast.makeText(getApplicationContext(),"Admin Control: " + adminCheck, Toast.LENGTH_LONG).show();
-
+        adminText.setText(isAdmin);
     }
 }

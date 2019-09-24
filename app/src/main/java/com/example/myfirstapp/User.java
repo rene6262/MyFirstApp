@@ -1,12 +1,10 @@
 package com.example.myfirstapp;
 
-public class User {
+import java.io.Serializable;
 
-    private String firstName;
-    private String lastName;
-    private String isAdmin;
+public class User implements Serializable {
 
-    public User(){}
+    private String firstName, lastName, isAdmin;
 
     public User (String firstName, String lastName, String isAdmin){
         setFirstName(firstName);
@@ -39,10 +37,6 @@ public class User {
     }
 
 
-    @Override
-    public String toString(){
-        return "User:" + "First:" + firstName + "Last:" + lastName + "Admin" + isAdmin;
-    }
 
 }
 

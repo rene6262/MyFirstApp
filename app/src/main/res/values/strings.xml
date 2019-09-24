@@ -3,4 +3,8 @@
     <string name="edit_message">First Name</string>
     <string name="edit_last_name">Last Name</string>
     <string name="button_send">Send</string>
+    <string name="tittle">Please Enter Your Info</string>
+    <string name="admin_switch">Admin</string>
+    <string name="admin_toggle_on">you are an admin</string>
+    <string name="admin_toggle_off"></string>
 </resources>

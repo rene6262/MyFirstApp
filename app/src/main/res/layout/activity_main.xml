@@ -20,10 +20,10 @@
         android:inputType="textPersonName"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/editText" />
+        app:layout_constraintTop_toBottomOf="@+id/editFirst" />
 
     <EditText
-        android:id="@+id/editText"
+        android:id="@+id/editFirst"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="30dp"
@@ -40,7 +40,7 @@
         app:layout_constraintTop_toBottomOf="@+id/tittle" />
 
     <Button
-        android:id="@+id/button"
+        android:id="@+id/sendButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="16dp"
@@ -49,17 +49,15 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.498"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/switch1" />
+        app:layout_constraintTop_toBottomOf="@+id/adminSwitch" />
 
     <Switch
-        android:id="@+id/switch1"
+        android:id="@+id/adminSwitch"
         android:layout_width="117dp"
         android:layout_height="23dp"
         android:layout_marginTop="16dp"
-        android:text="Switch"
+        android:text="@string/admin_switch"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintStart_toEndOf="@+id/admin"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/editLast" />
 
@@ -68,24 +66,11 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="16dp"
-        android:text="Please Enter Your Info"
+        android:text="@string/tittle"
         android:textAppearance="@style/TextAppearance.AppCompat.Display1"
         android:textSize="24sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
-    <TextView
-        android:id="@+id/admin"
-        android:layout_width="57dp"
-        android:layout_height="27dp"
-        android:layout_marginTop="16dp"
-        android:layout_marginEnd="16dp"
-        android:layout_marginRight="16dp"
-        android:text="Admin"
-        android:textSize="12sp"
-        app:layout_constraintEnd_toStartOf="@+id/switch1"
-        app:layout_constraintHorizontal_bias="1.0"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/editLast" />
 </androidx.constraintlayout.widget.ConstraintLayout>

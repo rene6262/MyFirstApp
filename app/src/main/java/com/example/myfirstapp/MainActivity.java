@@ -24,26 +24,10 @@ public class MainActivity extends AppCompatActivity {
         //First Name
         EditText editFirst = (EditText) findViewById(R.id.editFirst);
         String firstName = editFirst.getText().toString().trim();
-        if (firstName.length()==0) {
-            editFirst.requestFocus();
-            editFirst.setError("Please Enter a Name");
-        } else if(!firstName.matches("[a-zA-Z]+")){
-            editFirst.requestFocus();
-            editFirst.setError("Enter Valid Characters Only");
-        }
-        intent.putExtra("editFirst", firstName);
 
         //Last Name
         EditText editLast = (EditText) findViewById(R.id.editLast);
         String lastName = editLast.getText().toString().trim();
-        if (lastName.length()==0) {
-            editLast.requestFocus();
-            editLast.setError("Please Enter a Name");
-        } else if(!firstName.matches("[a-zA-Z]+")){
-            editLast.requestFocus();
-            editLast.setError("Enter Valid Characters Only");
-        }
-        intent.putExtra("editLast", lastName);
 
         //Admin Control
         Switch adminSwitch = (Switch) findViewById(R.id.adminSwitch);
@@ -55,13 +39,32 @@ public class MainActivity extends AppCompatActivity {
             adminStatus = adminSwitch.getTextOff().toString();
             adminToggle = getString(R.string.admin_toggle_off);
         }
-
         intent.putExtra("adminCheck", adminStatus);
         intent.putExtra("adminToggle", adminToggle);
 
-        if (firstName.length()!=0 & lastName.length()!=0) {
+        //Encapsulate Data
+        Encapsulation saveData = new Encapsulation();
+        saveData.setFirstName(firstName);
+        saveData.setLastName(lastName);
+        saveData.setAdminToggle(adminToggle);
+
+        //Validation
+        if (firstName.isEmpty()) {
+            editFirst.requestFocus();
+            editFirst.setError("Please Enter a Name");
+        } else if(!firstName.matches("[a-zA-Z]+")){
+            editFirst.requestFocus();
+            editFirst.setError("Enter Valid Characters Only");
+        } else if(lastName.isEmpty()) {
+            editLast.requestFocus();
+            editLast.setError("Please Enter a Name");
+        } else if(!firstName.matches("[a-zA-Z]+")){
+            editLast.requestFocus();
+            editLast.setError("Enter Valid Characters Only");
+        } else {
+            intent.putExtra("editFirst", firstName);
+            intent.putExtra("editLast", lastName);
             startActivity(intent);
         }
     }
-
 }

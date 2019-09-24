@@ -20,7 +20,8 @@ public class DisplayMessageActivity extends AppCompatActivity {
 
         // Get the Intent that started this activity and extract the string
         Intent intent = getIntent();
-        String firstName = intent.getStringExtra("editFirst");
+        
+        String firstName = Encapsulation.getFirstName();
         TextView textFirst = findViewById(R.id.textFirst);
         textFirst.setText(firstName);
 

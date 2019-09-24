@@ -36,6 +36,13 @@ public class MainActivity extends AppCompatActivity {
         //Last Name
         EditText editLast = (EditText) findViewById(R.id.editLast);
         String lastName = editLast.getText().toString().trim();
+        if (lastName.length()==0) {
+            editLast.requestFocus();
+            editLast.setError("Please Enter a Name");
+        } else if(!firstName.matches("[a-zA-Z]+")){
+            editLast.requestFocus();
+            editLast.setError("Enter Valid Characters Only");
+        }
         intent.putExtra("editLast", lastName);
 
         //Admin Control
@@ -52,7 +59,7 @@ public class MainActivity extends AppCompatActivity {
         intent.putExtra("adminCheck", adminStatus);
         intent.putExtra("adminToggle", adminToggle);
 
-        if (firstName.length()!=0) {
+        if (firstName.length()!=0 & lastName.length()!=0) {
             startActivity(intent);
         }
     }

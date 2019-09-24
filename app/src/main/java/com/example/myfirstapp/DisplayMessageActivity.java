@@ -20,17 +20,19 @@ public class DisplayMessageActivity extends AppCompatActivity {
 
         // Get the Intent that started this activity and extract the string
         Intent intent = getIntent();
-
-        String firstName = intent.getStringExtra("editFirst");
+        // Get the Bundle
+        Bundle userDataBundle = intent.getExtras();
+        // Get the information from the Bundle
+        String firstName = userDataBundle.getString("editFirst");
         TextView textFirst = findViewById(R.id.textFirst);
         textFirst.setText(firstName);
 
-        String lastName = intent.getStringExtra("editLast");
+        String lastName = userDataBundle.getString("editLast");
         TextView textLast = findViewById(R.id.textLast);
         textLast.setText(lastName);
 
-        String adminCheck = intent.getStringExtra("adminCheck");
-        String adminToggle = intent.getStringExtra("adminToggle");
+        String adminCheck = userDataBundle.getString("adminCheck");
+        String adminToggle = userDataBundle.getString("adminToggle");
         adminSwitch = (Switch) findViewById(R.id.adminSwitch);
         TextView adminText = findViewById(R.id.adminText);
         adminText.setText(adminToggle);

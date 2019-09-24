@@ -3,10 +3,10 @@ package com.example.myfirstapp;
 import androidx.appcompat.app.AppCompatActivity;
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.Parcelable;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.Switch;
-import android.widget.Toast;
 
 
 public class MainActivity extends AppCompatActivity {
@@ -31,21 +31,20 @@ public class MainActivity extends AppCompatActivity {
 
         //Admin Control
         Switch adminSwitch = (Switch) findViewById(R.id.adminSwitch);
-        String adminStatus, adminToggle;
+        String adminStatus, isAdmin;
         if (adminSwitch.isChecked()){
             adminStatus = adminSwitch.getTextOn().toString();
-            adminToggle = getString(R.string.admin_toggle_on);
+            isAdmin = getString(R.string.admin_toggle_on);
         } else {
             adminStatus = adminSwitch.getTextOff().toString();
-            adminToggle = getString(R.string.admin_toggle_off);
+            isAdmin = getString(R.string.admin_toggle_off);
         }
 
-
         //Encapsulate Data
-        Encapsulation saveData = new Encapsulation();
+        User saveData = new User();
         saveData.setFirstName(firstName);
         saveData.setLastName(lastName);
-        saveData.setAdminToggle(adminToggle);
+        saveData.setIsAdmin(isAdmin);
 
         //Validation
         if (firstName.isEmpty()) {
@@ -62,10 +61,17 @@ public class MainActivity extends AppCompatActivity {
             editLast.setError("Enter Valid Characters Only");
         } else {
             //Pass All Values Through The Intent
-            intent.putExtra("editFirst", saveData.getFirstName());
-            intent.putExtra("editLast", saveData.getLastName());
-            intent.putExtra("adminCheck", adminStatus);
-            intent.putExtra("adminToggle", saveData.getAdminToggle());
+            Bundle userDataBundle = new Bundle();
+
+            userDataBundle.putString("editFirst", saveData.getFirstName());
+            userDataBundle.putString("editLast", saveData.getLastName());
+            userDataBundle.putString("adminCheck", adminStatus);
+            userDataBundle.putString("adminToggle", saveData.getIsAdmin());
+
+            intent.putExtras(userDataBundle);
+
+//            intent.putExtra("user_data", (Parcelable) saveData);
+
             startActivity(intent);
         }
     }

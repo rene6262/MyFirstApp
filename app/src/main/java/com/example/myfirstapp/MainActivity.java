@@ -39,8 +39,7 @@ public class MainActivity extends AppCompatActivity {
             adminStatus = adminSwitch.getTextOff().toString();
             adminToggle = getString(R.string.admin_toggle_off);
         }
-        intent.putExtra("adminCheck", adminStatus);
-        intent.putExtra("adminToggle", adminToggle);
+
 
         //Encapsulate Data
         Encapsulation saveData = new Encapsulation();
@@ -62,8 +61,11 @@ public class MainActivity extends AppCompatActivity {
             editLast.requestFocus();
             editLast.setError("Enter Valid Characters Only");
         } else {
-            intent.putExtra("editFirst", firstName);
-            intent.putExtra("editLast", lastName);
+            //Pass All Values Through The Intent
+            intent.putExtra("editFirst", saveData.getFirstName());
+            intent.putExtra("editLast", saveData.getLastName());
+            intent.putExtra("adminCheck", adminStatus);
+            intent.putExtra("adminToggle", saveData.getAdminToggle());
             startActivity(intent);
         }
     }

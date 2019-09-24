@@ -11,7 +11,7 @@ import android.widget.Toast;
 
 
 public class MainActivity extends AppCompatActivity {
-    public static final String EXTRA_MESSAGE = "com.example.myfirstapp.MESSAGE";
+    public static final String INTENT_USER_KEY = "com.example.myfirstapp.MESSAGE";
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -32,22 +32,18 @@ public class MainActivity extends AppCompatActivity {
 
         //Admin Control
         Switch adminSwitch = (Switch) findViewById(R.id.adminSwitch);
-        String adminStatus, isAdmin;
+        String adminStatus;
+        boolean isAdmin = adminSwitch.isChecked();
         if (adminSwitch.isChecked()){
             adminStatus = adminSwitch.getTextOn().toString();
-            isAdmin = getString(R.string.admin_toggle_on);
         } else {
             adminStatus = adminSwitch.getTextOff().toString();
-            isAdmin = getString(R.string.admin_toggle_off);
         }
+        //make on click
         Toast.makeText(getApplicationContext(),"Admin Control: " + adminStatus, Toast.LENGTH_LONG).show();
-
 
         //Encapsulate Data
         User saveData = new User(firstName, lastName, isAdmin);
-        saveData.setFirstName(firstName);
-        saveData.setLastName(lastName);
-        saveData.setIsAdmin(isAdmin);
 
         //Validation
         if (firstName.isEmpty()) {
@@ -64,16 +60,7 @@ public class MainActivity extends AppCompatActivity {
             editLast.setError("Enter Valid Characters Only");
         } else {
             //Pass All Values Through The Intent
-            intent.putExtra("User", saveData);
-
-
-//            Bundle userDataBundle = new Bundle();
-//            userDataBundle.putString("editFirst", saveData.getFirstName());
-//            userDataBundle.putString("editLast", saveData.getLastName());
-//            userDataBundle.putString("adminCheck", adminStatus);
-//            userDataBundle.putString("adminToggle", saveData.getIsAdmin());
-//            intent.putExtras(userDataBundle);
-
+            intent.putExtra(INTENT_USER_KEY, saveData);
 
             startActivity(intent);
         }

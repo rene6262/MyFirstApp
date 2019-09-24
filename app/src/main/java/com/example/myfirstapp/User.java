@@ -4,9 +4,11 @@ import java.io.Serializable;
 
 public class User implements Serializable {
 
-    private String firstName, lastName, isAdmin;
+    private String firstName;
+    private String lastName;
+    private boolean isAdmin;
 
-    public User (String firstName, String lastName, String isAdmin){
+    public User (String firstName, String lastName, boolean isAdmin){
         setFirstName(firstName);
         setLastName(lastName);
         setIsAdmin(isAdmin);
@@ -20,7 +22,7 @@ public class User implements Serializable {
         return lastName;
     }
 
-    public String getIsAdmin() {
+    public boolean getIsAdmin() {
         return isAdmin;
     }
 
@@ -32,11 +34,8 @@ public class User implements Serializable {
         lastName = newLastName;
     }
 
-    public void setIsAdmin(String newIsAdmin){
+    public void setIsAdmin(boolean newIsAdmin) {
         isAdmin = newIsAdmin;
     }
-
-
-
 }
 

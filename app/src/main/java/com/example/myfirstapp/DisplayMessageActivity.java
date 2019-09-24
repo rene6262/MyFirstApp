@@ -21,7 +21,7 @@ public class DisplayMessageActivity extends AppCompatActivity {
         // Get the Intent that started this activity and extract the string
         //Intent intent = getIntent();
 
-        User User = (User) getIntent().getSerializableExtra("User");
+        User User = (User) getIntent().getSerializableExtra(MainActivity.INTENT_USER_KEY);
 
         // Get First Name
         String firstName = User.getFirstName();
@@ -32,9 +32,16 @@ public class DisplayMessageActivity extends AppCompatActivity {
         TextView textLast = findViewById(R.id.textLast);
         textLast.setText(lastName);
         // Get Admin Toggle
-        String isAdmin = User.getIsAdmin();
+        boolean isAdmin = User.getIsAdmin();
+        String adminStatus;
         adminSwitch = (Switch) findViewById(R.id.adminSwitch);
+        if(isAdmin = true){
+            adminStatus = getString(R.string.admin_toggle_on);
+        } else {
+            adminStatus = getString(R.string.admin_toggle_off);
+        }
         TextView adminText = findViewById(R.id.adminText);
-        adminText.setText(isAdmin);
+        adminText.setText(adminStatus);
+
     }
 }

@@ -20,7 +20,13 @@ public class MainActivity extends AppCompatActivity {
         Intent intent = new Intent(this, DisplayMessageActivity.class);
         EditText editText = (EditText) findViewById(R.id.editText);
         String message = editText.getText().toString();
-        intent.putExtra(EXTRA_MESSAGE, message);
+        intent.putExtra("editText", message);
+
+        EditText editLast = (EditText) findViewById(R.id.editLast);
+        String message2 = editLast.getText().toString();
+        intent.putExtra("editLast", message2);
+
         startActivity(intent);
     }
+
 }

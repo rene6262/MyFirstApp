@@ -3,6 +3,7 @@ package com.example.myfirstapp;
 import androidx.appcompat.app.AppCompatActivity;
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.Switch;
@@ -14,6 +15,7 @@ public class MainActivity extends AppCompatActivity {
     public static final String INTENT_USER_KEY = "com.example.myfirstapp.MESSAGE";
 
     public boolean isAdmin;
+    private static final String TAG = "MainActivity";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -24,37 +26,37 @@ public class MainActivity extends AppCompatActivity {
     /** Called when the user taps the Send button */
     public void sendMessage(View view) throws InvalidNameException {
 
+        //First Name
+        final EditText editFirst = findViewById(R.id.editFirst);
+        final String firstName = editFirst.getText().toString().trim();
+
+        //Last Name
+        final EditText editLast = findViewById(R.id.editLast);
+        final String lastName = editLast.getText().toString().trim();
+
         try{
-            Intent intent = new Intent(this, DisplayMessageActivity.class);
-            InvalidNameException instance = new InvalidNameException(this);
-            User user = (User) getIntent().getSerializableExtra(MainActivity.INTENT_USER_KEY);
-
-            //First Name
-            EditText editFirst = (EditText) findViewById(R.id.editFirst);
-            String firstName = editFirst.getText().toString().trim();
-
-            //Last Name
-            EditText editLast = (EditText) findViewById(R.id.editLast);
-            String lastName = editLast.getText().toString().trim();
-
-            //Admin Control
-            Switch adminSwitch = (Switch) findViewById(R.id.adminSwitch);
-            String adminStatus;
-            boolean isAdmin = adminSwitch.isChecked();
-            if (adminSwitch.isChecked()){
-                adminStatus = adminSwitch.getTextOn().toString();
-            } else {
-                adminStatus = adminSwitch.getTextOff().toString();
-            }
-            Toast.makeText(this, "Admin Access: " + adminStatus, Toast.LENGTH_LONG).show();
-
+            Log.d(TAG, "before user");
             //Encapsulate Data
-            User saveData = new User(firstName, lastName, isAdmin);
+            final User user = new User(
+                    firstName,
+                    lastName,
+                    ((Switch) findViewById(R.id.adminSwitch)).isChecked()
+            );
 
-            intent.putExtra(INTENT_USER_KEY, saveData);
+            final Intent intent = new Intent(this, DisplayMessageActivity.class);
+            intent.putExtra(INTENT_USER_KEY, user);
             startActivity(intent);
 
-        } catch (InvalidNameException e){
+        } catch (InvalidNameException e) {
+            Log.d(TAG, "inside catch");
+            if (e.getName().equals(firstName)) {
+                Log.d(TAG, "in catch first name if");
+                editFirst.requestFocus();
+                editFirst.setError("Please Enter a Name");
+            } else if (e.getName().equals(lastName)){
+                editLast.requestFocus();
+                editLast.setError("Please Enter a Name");
+            }
             Toast.makeText(this, e.getMessage(), Toast.LENGTH_LONG).show();
         }
 

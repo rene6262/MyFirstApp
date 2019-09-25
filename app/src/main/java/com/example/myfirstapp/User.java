@@ -1,8 +1,6 @@
 package com.example.myfirstapp;
 
-import android.content.Intent;
-import android.os.Bundle;
-import android.view.View;
+import android.util.Log;
 import android.widget.EditText;
 import android.widget.Toast;
 
@@ -13,6 +11,7 @@ public class User implements Serializable {
     private String firstName;
     private String lastName;
     private boolean isAdmin;
+    private static final String TAG = "UserClass";
 
     public User(String firstName, String lastName, boolean isAdmin) throws InvalidNameException {
         setFirstName(firstName);
@@ -32,34 +31,19 @@ public class User implements Serializable {
         return isAdmin;
     }
 
-    public void setFirstName(String newFirstName) throws InvalidNameException {
-        firstName = newFirstName;
-        if(firstName.isEmpty()) {
-            throw new InvalidNameException("Name Could Not Be Submitted", new Throwable("Error"));
-        }
-    }
-    public void setFirstName(EditText editFirst) {
-        //String firstName = editFirst.getText().toString().trim();
-        editFirst.requestFocus();
-        editFirst.setError("Please Enter a Name");
+    public void setFirstName(String name) throws InvalidNameException {
+        firstName = name;
+        if(firstName.isEmpty())
+            throw new InvalidNameException(firstName,"Name Could Not Be Submitted");
     }
 
-    public void setLastName(String newLastName) throws InvalidNameException {
-        lastName = newLastName;
-        if(lastName.isEmpty()) {
-            throw new InvalidNameException("Name Could Not Be Submitted", new Throwable("Error"));
-        }
-    }
-
-    public void setLastName(EditText editLast) {
-        //String lastName = editLast.getText().toString().trim();
-        editLast.requestFocus();
-        editLast.setError("Please Enter a Name");
+    public void setLastName(String name) throws InvalidNameException {
+        lastName = name;
+        if(lastName.isEmpty())
+            throw new InvalidNameException(lastName,"Name Could Not Be Submitted");
     }
 
     public void setIsAdmin(boolean newIsAdmin) {
         isAdmin = newIsAdmin;
     }
-
-
 }

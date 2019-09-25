@@ -1,23 +1,21 @@
 package com.example.myfirstapp;
 
 import android.app.Activity;
-import android.content.Intent;
-import android.widget.EditText;
+import android.util.Log;
 
 public class InvalidNameException extends Exception{
-    public Activity activityError;
-    private String errorMessage;
 
+    private String name;
+    private static final String TAG = "InvalidName";
 
-    public InvalidNameException(MainActivity mainActivity) {
-        super();
+    public InvalidNameException(String name, String message) {
+        super(message, null);
+        this.name = name;
     }
 
-    public InvalidNameException(String errorMessage, Throwable errorCause) {
-        super(errorMessage, errorCause);
-
-        this.errorMessage = errorMessage;
-        //this.errorCause = errorCause;
+    public String getName(){
+        Log.d(TAG, name);
+        return name;
     }
 }
 

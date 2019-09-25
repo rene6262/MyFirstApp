@@ -19,29 +19,33 @@ public class DisplayMessageActivity extends AppCompatActivity {
         setContentView(R.layout.activity_display_message);
 
         // Get the Intent that started this activity and extract the string
-        //Intent intent = getIntent();
+        User user = (User) getIntent().getSerializableExtra(MainActivity.INTENT_USER_KEY);
 
-        User User = (User) getIntent().getSerializableExtra(MainActivity.INTENT_USER_KEY);
+        try {
+            // Get First Name
+            String firstName = user.getFirstName();
+            TextView textFirst = findViewById(R.id.textFirst);
+            textFirst.setText(firstName);
 
-        // Get First Name
-        String firstName = User.getFirstName();
-        TextView textFirst = findViewById(R.id.textFirst);
-        textFirst.setText(firstName);
-        // Get Last Name
-        String lastName = User.getLastName();
-        TextView textLast = findViewById(R.id.textLast);
-        textLast.setText(lastName);
-        // Get Admin Toggle
-        boolean isAdmin = User.getIsAdmin();
-        String adminStatus;
-        adminSwitch = (Switch) findViewById(R.id.adminSwitch);
-        if(isAdmin = true){
-            adminStatus = getString(R.string.admin_toggle_on);
-        } else {
-            adminStatus = getString(R.string.admin_toggle_off);
+            // Get Last Name
+            String lastName = user.getLastName();
+            TextView textLast = findViewById(R.id.textLast);
+            textLast.setText(lastName);
+
+            // Get Admin Toggle
+            boolean isAdmin = user.getIsAdmin();
+            String adminStatus;
+            adminSwitch = (Switch) findViewById(R.id.adminSwitch);
+            if (isAdmin) {
+                adminStatus = getString(R.string.admin_toggle_on);
+            } else {
+                adminStatus = getString(R.string.admin_toggle_off);
+            }
+            TextView adminText = findViewById(R.id.adminText);
+            adminText.setText(adminStatus);
         }
-        TextView adminText = findViewById(R.id.adminText);
-        adminText.setText(adminStatus);
-
+        catch (NullPointerException e){
+            Toast.makeText(this, e.getMessage(), Toast.LENGTH_LONG).show();
+        }
     }
 }

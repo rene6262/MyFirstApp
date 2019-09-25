@@ -5,6 +5,8 @@
     <string name="button_send">Send</string>
     <string name="tittle">Please Enter Your Info</string>
     <string name="admin_switch">Admin</string>
-    <string name="admin_toggle_on">you are an admin</string>
+    <string name="admin_toggle_on">You are an Admin</string>
     <string name="admin_toggle_off"></string>
+    <string name="admin_on">On</string>
+    <string name="admin_off">Off</string>
 </resources>

@@ -36,19 +36,25 @@ public class User implements Serializable {
         firstName = newFirstName;
         if(firstName.isEmpty()) {
             throw new InvalidNameException("Name Could Not Be Submitted", new Throwable("Error"));
-            //Toast.makeText(this, InvalidNameException.getMessage(), Toast.LENGTH_LONG).show();
-        } else {
-            
         }
+    }
+    public void setFirstName(EditText editFirst) {
+        //String firstName = editFirst.getText().toString().trim();
+        editFirst.requestFocus();
+        editFirst.setError("Please Enter a Name");
     }
 
     public void setLastName(String newLastName) throws InvalidNameException {
         lastName = newLastName;
         if(lastName.isEmpty()) {
             throw new InvalidNameException("Name Could Not Be Submitted", new Throwable("Error"));
-            //editFirst.requestFocus();
-            //editFirst.setError("Please Enter a Name");
         }
+    }
+
+    public void setLastName(EditText editLast) {
+        //String lastName = editLast.getText().toString().trim();
+        editLast.requestFocus();
+        editLast.setError("Please Enter a Name");
     }
 
     public void setIsAdmin(boolean newIsAdmin) {

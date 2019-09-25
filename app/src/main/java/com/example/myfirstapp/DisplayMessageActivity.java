@@ -2,12 +2,10 @@ package com.example.myfirstapp;
 
 import androidx.appcompat.app.AppCompatActivity;
 
-import android.content.Intent;
 import android.os.Bundle;
 import android.widget.Switch;
 import android.widget.TextView;
 import android.widget.Toast;
-
 
 public class DisplayMessageActivity extends AppCompatActivity {
 

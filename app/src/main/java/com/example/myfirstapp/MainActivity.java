@@ -15,10 +15,6 @@ public class MainActivity extends AppCompatActivity {
 
     public boolean isAdmin;
 
-    //EditText editFirst;
-    //EditText editLast;
-
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -27,33 +23,48 @@ public class MainActivity extends AppCompatActivity {
 
     /** Called when the user taps the Send button */
     public void sendMessage(View view) throws InvalidNameException {
-        Intent intent = new Intent(this, DisplayMessageActivity.class);
 
-        InvalidNameException instance = new InvalidNameException(this);
+        try{
+            Intent intent = new Intent(this, DisplayMessageActivity.class);
+            InvalidNameException instance = new InvalidNameException(this);
+            User user = (User) getIntent().getSerializableExtra(MainActivity.INTENT_USER_KEY);
 
-        User user = (User) getIntent().getSerializableExtra(MainActivity.INTENT_USER_KEY);
+            //First Name
+            EditText editFirst = (EditText) findViewById(R.id.editFirst);
+            String firstName = editFirst.getText().toString().trim();
 
-        //First Name
-        //EditText editFirst = (EditText) findViewById(R.id.editFirst);
-        //String firstName = editFirst.getText().toString().trim();
+            //Last Name
+            EditText editLast = (EditText) findViewById(R.id.editLast);
+            String lastName = editLast.getText().toString().trim();
 
-        //Last Name
-        //EditText editLast = (EditText) findViewById(R.id.editLast);
-        //String lastName = editLast.getText().toString().trim();
+            //Admin Control
+            Switch adminSwitch = (Switch) findViewById(R.id.adminSwitch);
+            String adminStatus;
+            boolean isAdmin = adminSwitch.isChecked();
+            if (adminSwitch.isChecked()){
+                adminStatus = adminSwitch.getTextOn().toString();
+            } else {
+                adminStatus = adminSwitch.getTextOff().toString();
+            }
+            Toast.makeText(this, "Admin Access: " + adminStatus, Toast.LENGTH_LONG).show();
 
-        //Admin Control
-        Switch adminSwitch = (Switch) findViewById(R.id.adminSwitch);
-        String adminStatus;
-        boolean isAdmin = adminSwitch.isChecked();
-        if (adminSwitch.isChecked()){
-            adminStatus = adminSwitch.getTextOn().toString();
-        } else {
-            adminStatus = adminSwitch.getTextOff().toString();
+            //Encapsulate Data
+            User saveData = new User(firstName, lastName, isAdmin);
+
+            intent.putExtra(INTENT_USER_KEY, saveData);
+            startActivity(intent);
+
+        } catch (InvalidNameException e){
+            Toast.makeText(this, e.getMessage(), Toast.LENGTH_LONG).show();
         }
-        Toast.makeText(this, "Admin Access: " + adminStatus, Toast.LENGTH_LONG).show();
 
-        //Encapsulate Data
-        //User saveData = new User(firstName, lastName, isAdmin);
+
+
+
+
+
+
+
 
         //Validation
 //        if (firstName.isEmpty()) {

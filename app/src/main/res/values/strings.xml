@@ -3,7 +3,10 @@
     <string name="edit_message">First Name</string>
     <string name="edit_last_name">Last Name</string>
     <string name="button_send">Send</string>
-    <string name="tittle">Please Enter Your Info</string>
+    <string name="title">Please Enter Your Info</string>
+    <string name="user_list_title">User List</string>
+    <string name="name_title">Full Name</string>
+    <string name="id_title">ID</string>
     <string name="admin_switch">Admin</string>
     <string name="admin_toggle_on">You are an Admin</string>
     <string name="admin_toggle_off"></string>
